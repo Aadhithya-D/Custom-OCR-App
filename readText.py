@@ -21,6 +21,21 @@ def appendFile(dir):
     return fileNames, newFileName
 
 
+def duplicate(new):
+    tempDict = {}
+    for i in new:
+        tempDict[i] = 0
+    for i in new:
+        tempDict[i] += 1
+    for i in tempDict:
+        if tempDict[i] > 1:
+            for j in range(1, tempDict[i] + 1):
+                for k in range(len(new)):
+                    if new[k] == i:
+                        new[k] = new[k][:len(new[k]) - 4] + "-" + str(j) + ".mp4"
+                        break
+
+
 def fileRename(path, oldNames, newNames):
     for i in range(len(newNames)):
         oldName = path + f"\\{oldNames[i]}"
@@ -28,9 +43,10 @@ def fileRename(path, oldNames, newNames):
         os.rename(oldName, newName)
 
 
-path = r"D:\Class Recordings\BMAT\t"
+path = r"D:\Class Recordings\BEEE Lab\OneDrive_2_09-04-2022"
 fileNames = os.listdir(path)
 output = appendFile(path)
+duplicate(output[1])
 for i in output[1]:
     print(i)
 fileRename(path, output[0], output[1])
